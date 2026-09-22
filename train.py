@@ -18,7 +18,7 @@ X_train_text, X_test_text, y_train, y_test = train_test_split(
 )
 
 # TF-IDF Vectorize
-vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,2),max_features=10000)
+vectorizer = TfidfVectorizer(ngram_range=(1,2),max_features=15000,min_df=2)
 X_train = vectorizer.fit_transform(X_train_text)
 X_test = vectorizer.transform(X_test_text)
 
