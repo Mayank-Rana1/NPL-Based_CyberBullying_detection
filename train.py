@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import MultinomialNB
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 import pickle
 
@@ -18,12 +18,13 @@ X_train_text, X_test_text, y_train, y_test = train_test_split(
 )
 
 # TF-IDF Vectorize
-vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,2))
+vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1,2),max_features=10000)
 X_train = vectorizer.fit_transform(X_train_text)
 X_test = vectorizer.transform(X_test_text)
 
-# Simple Naive Bayes - Human understandable
-model = MultinomialNB()
+
+# Simple Logistic Regression
+model = LogisticRegression(max_iter=1000, class_weight='balanced')
 model.fit(X_train, y_train)
 
 # Evaluate
